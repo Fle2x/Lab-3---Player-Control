@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _playerRb;
     private float _horizontalInput;
     private float _verticalInput;
+    private float _zBound = 6;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +24,17 @@ public class PlayerController : MonoBehaviour
 
         _playerRb.AddForce(Vector3.forward * _speed * _verticalInput);
         _playerRb.AddForce(Vector3.right * _speed * _horizontalInput);
+
+        if (transform.position.z < -_zBound)
+        {
+            Debug.Log("-_zBound");
+            transform.position = new Vector3(transform.position.x, transform.position.y, -_zBound);
+        }
+
+        if (transform.position.z > _zBound)
+        {
+            Debug.Log("_zBound");
+            transform.position = new Vector3(transform.position.x, transform.position.y, _zBound);
+        }
     }
 }
